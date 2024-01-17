@@ -1,30 +1,44 @@
-import React, { useState } from 'react';
-import { ImageBackground, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-import { useAuth } from '../contexts/AuthContext';
+import React, { useState } from 'react'
+import { Button, ImageBackground, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { useNavigation } from '@react-navigation/native'
+import { useAuth } from '../contexts/AuthContext'
 
 const LoginScreen = () => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const { login } = useAuth();
-  const navigation = useNavigation();
-  
-  const handleLogin = () => {
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
+  const { login } = useAuth()
+  const navigation = useNavigation()
+const handleLogin = (user: { username:string;password: string}) => {
+  fetch(`http://172.16.102.222:8888/users/login`, {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      name: user.username,
+      password: user.password,
+    }),
+  })
+    .then(response => {
+      if (response.status==400) {
+        throw new Error('No se envio cuerpo en la peticion')
+      }
+      return response.json()
+    })
+    .then(data => {if (data.username==""){
+      console.log("Error")
+    }2
 
-   
-    if (username === 'Emc' && password === '1111') {
-      login({ username });
-
-      console.log('Inicio de sesión exitoso:', username);
-     
-      navigation.navigate('Home' as never);
-    } else {
-      
-     
-    
-      
-    }
-  };
+      login({ username: data.username });
+      console.log('Inicio de sesión exitoso:', data.username)
+      navigation.navigate('Home' as never)
+    })
+    .catch(error => {
+      console.error('Error al iniciar sesión:', error.message)
+      alert('Credenciales incorrectas. Verifica tus datos e inténtalo nuevamente.')
+    });
+};
 
   return (
     <ImageBackground source={require('../assets/images/madara.jpg')} style={styles.backgroundImage}>
@@ -45,14 +59,14 @@ const LoginScreen = () => {
           value={password}
           onChangeText={(text) => setPassword(text)}
         />
-        <TouchableOpacity style={styles.loginButton} onPress={handleLogin}>
-          <Text style={styles.loginButtonText}>Iniciar Sesión</Text>
-          
-        </TouchableOpacity>
+       <Button title={"Login"} onPress={() => handleLogin({ username, password })} />
+         
+        
       </View>
     </ImageBackground>
-  )
-}
+  );
+};
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -68,7 +82,6 @@ const styles = StyleSheet.create({
   input: {
     height: 40,
     width: '80%',
-   
     marginBottom: 16,
     paddingHorizontal: 10,
     color: 'white',
@@ -88,14 +101,6 @@ const styles = StyleSheet.create({
     width: '100%',
     justifyContent: 'center',
   },
-});
+})
 
-export default LoginScreen;
-function setError(arg0: string) {
-  throw new Error('Function not implemented.');
-}
-
-function setIsAuthenticated(arg0: boolean) {
-  throw new Error('Function not implemented.');
-}
-
+export default LoginScreen

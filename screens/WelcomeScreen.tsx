@@ -1,13 +1,13 @@
-import CustomDrawer from '../components/CustomDrawer';
-import React from 'react';
-import { View, Text, Button,  StyleSheet, ImageBackground } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import CustomDrawer from '../components/CustomDrawer'
+import React from 'react'
+import { View, Text, Button,  StyleSheet, ImageBackground } from 'react-native'
+import { useNavigation } from '@react-navigation/native'
 
 const WelcomeScreen = () => {
-    const navigation = useNavigation();
+    const navigation = useNavigation()
     
     const goToLogin = () => {
-      navigation.navigate('Login' as never);
+      navigation.navigate('Login' as never)
     };
   
     return (
@@ -17,8 +17,8 @@ const WelcomeScreen = () => {
           <Button title="Login" onPress={goToLogin} />
         </View>
       </ImageBackground>
-    );
-  };
+    )
+  }
 
 export default WelcomeScreen;
 

@@ -8,6 +8,8 @@ import LoginScreen from '../screens/LoginScreen';
 import appColors from '../assets/styles/appColors';
 import SubHeaderEric from './SubHeaderEric';
 import { useAuth } from '../contexts/AuthContext';
+import RegisterScreen from '../screens/RegisterScreen';
+import LogoutScreen from '../screens/LogOutScreen';
 
 const Drawer = createDrawerNavigator();
 
@@ -40,24 +42,25 @@ const CustomDrawer = ({user}:any) => {
       <>
         <Drawer.Screen name='Home' component={HomeScreen} />
         <Drawer.Screen name='Login' component={LoginScreen} />
+        <Drawer.Screen name='Register' component={RegisterScreen}/>
         
       </>
-    );
+    )
   } else {
     screens = (
       <>
         <Drawer.Screen name='Home' component={HomeScreen} />
-        <Drawer.Screen name='Eric' component={SubHeaderEric} />
+        <Drawer.Screen name='Me' component={SubHeaderEric} />
+        <Drawer.Screen name='Logout' component={LogoutScreen}/>
       </>
-    );
+    )
   }
 
   return (
     <Drawer.Navigator screenOptions={drawerNavigatorScreenOptions}>
       {screens}
     </Drawer.Navigator>
-  );
-}
+  )}
 
 const styles = StyleSheet.create({
   headerContainer: {
