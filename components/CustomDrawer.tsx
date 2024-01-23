@@ -10,6 +10,7 @@ import SubHeaderEric from './SubHeaderEric';
 import { useAuth } from '../contexts/AuthContext';
 import RegisterScreen from '../screens/RegisterScreen';
 import LogoutScreen from '../screens/LogOutScreen';
+import Grabadora from '../screens/Grabadora';
 
 const Drawer = createDrawerNavigator();
 
@@ -43,6 +44,8 @@ const CustomDrawer = ({user}:any) => {
         <Drawer.Screen name='Home' component={HomeScreen} />
         <Drawer.Screen name='Login' component={LoginScreen} />
         <Drawer.Screen name='Register' component={RegisterScreen}/>
+      
+    
         
       </>
     )
@@ -52,6 +55,10 @@ const CustomDrawer = ({user}:any) => {
         <Drawer.Screen name='Home' component={HomeScreen} />
         <Drawer.Screen name='Me' component={SubHeaderEric} />
         <Drawer.Screen name='Logout' component={LogoutScreen}/>
+        <Drawer.Screen name='Record' component={Grabadora}/>
+     
+        
+       
       </>
     )
   }

@@ -9,7 +9,7 @@ const LoginScreen = () => {
   const { login } = useAuth()
   const navigation = useNavigation()
 const handleLogin = (user: { username:string;password: string}) => {
-  fetch(`http://172.16.102.222:8888/users/login`, {
+  fetch(`http://172.16.100.30:8888/users/login`, {
     method: 'POST',
     headers: {
       Accept: 'application/json',
@@ -28,7 +28,7 @@ const handleLogin = (user: { username:string;password: string}) => {
     })
     .then(data => {if (data.username==""){
       console.log("Error")
-    }2
+    }
 
       login({ username: data.username });
       console.log('Inicio de sesión exitoso:', data.username)
@@ -37,8 +37,8 @@ const handleLogin = (user: { username:string;password: string}) => {
     .catch(error => {
       console.error('Error al iniciar sesión:', error.message)
       alert('Credenciales incorrectas. Verifica tus datos e inténtalo nuevamente.')
-    });
-};
+    })
+}
 
   return (
     <ImageBackground source={require('../assets/images/madara.jpg')} style={styles.backgroundImage}>
@@ -64,8 +64,8 @@ const handleLogin = (user: { username:string;password: string}) => {
         
       </View>
     </ImageBackground>
-  );
-};
+  )
+}
 
 const styles = StyleSheet.create({
   container: {

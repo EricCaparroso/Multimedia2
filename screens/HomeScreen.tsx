@@ -1,11 +1,11 @@
 import React from 'react';
 import { View, StyleSheet, ImageBackground, Text, Button } from 'react-native';
-import { useAuth } from '../contexts/AuthContext';
-import { useNavigation } from '@react-navigation/native';
+import { useAuth } from '../contexts/AuthContext'
+import { useNavigation } from '@react-navigation/native'
 
 const HomeScreen = () => {
-  const { user, isAuthenticated, logout } = useAuth(); 
-  const navigation = useNavigation();
+  const { user, isAuthenticated, logout } = useAuth()
+  const navigation = useNavigation()
 
   const goToLogin = () => {
     navigation.navigate('Login' as never);

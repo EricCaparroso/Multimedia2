@@ -26,7 +26,7 @@ const RegisterScreen = () => {
   };
 
   function sendRegistrationRequest(user: { username:string; email: string; password: string }) {
-    fetch("http://172.16.102.222:8888/users/register",{
+    fetch("http://172.16.100.30:8888/users/register",{
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -39,25 +39,18 @@ const RegisterScreen = () => {
         password: user.password,
       })
     })
-
     .then(response => {
       console.log(response.status)
-      
       return response.json();
     })
     .then(data => {
-      
       console.log('Registration successful', data);
       navigation.navigate('Login' as never)
       login({ username: user.username });
-
-
       setUserCreated(true);
     })
     .catch(error => {
-      
       console.error('Registration error:', error.message);
-    
     });
 
     
@@ -67,7 +60,7 @@ const RegisterScreen = () => {
 
 
   function userRegistered(user: any){
-    fetch("http://172.16.102.222:8888/users/all",{
+    fetch("http://172.16.100.30:8888/users/all",{
       method: 'GET',
       headers: {
         Accept: 'application/json',
